@@ -1,0 +1,127 @@
+/**
+ * components.css
+ * 
+ * Purpose: Defines styles for UI components with a new Bento grid implementation for the link grid on tablet and desktop.
+ * Scope: Styles components in index.html, applied after main.css and themes.css but before responsive.css.
+ * Dependencies: Relies on CSS variables from main.css or themes.css (e.g., --glass-bg, --text-primary).
+ * When to Modify: Update for new components, Bento grid layouts, or animation adjustments.
+ * Performance Notes: Optimized CSS Grid and animations for smooth rendering.
+ * Last Modified: June 5, 2025 - Added Bento grid styles.
+ */
+
+
+
+/* Profile Header (unchanged) */
+.profile-header {
+  text-align: center;
+  margin-bottom: 5px;
+  animation: fade-in-up 0.8s ease-out;
+}
+
+.profile-header__image {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  margin: 0 auto 24px;
+  box-shadow: var(--shadow-light);
+  border: 2px solid var(--glass-border);
+  object-fit: cover;
+  transition: box-shadow 0.5s ease, border-color 0.5s ease;
+  margin-bottom: 1px;
+}
+
+.profile-header__image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.15) 2px, transparent 2px),
+              radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 1.5px, transparent 1.5px);
+  border-radius: 50%;
+}
+
+.profile-header__image::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: rotate(45deg);
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.profile-header__name {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 1px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  letter-spacing: -0.5px;
+}
+
+.profile-header__bio {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+/* Social Footer (unchanged) */
+.social-footer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.social-footer__item {
+  aspect-ratio: 1;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+}
+
+.social-footer__item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 2px, transparent 2px),
+              radial-gradient(circle at 70% 70%, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 20px;
+}
+
+.social-footer__item:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.social-footer__item:hover::before {
+  opacity: 1;
+}

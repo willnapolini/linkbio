@@ -1,0 +1,218 @@
+/**
+ * main.css
+ * 
+ * Purpose: Defines global styles, CSS resets, base typography, animations, and accessibility features for the Linktree-style website, providing a foundation for responsive and theme-specific styles.
+ * Dependencies: Relies on themes.css for CSS custom properties (--primary-gradient, --text-primary, --text-secondary, --vh, --scroll) and index.html for DOM structure. Complements components.css and responsive.css.
+ * Usage: Applied globally via <link> tag in index.html, styles body, container, links, images, and interactive effects (parallax, ripple, intersection observer).
+ * Performance Notes: Minimal selectors with efficient properties; animations optimized with will-change and reduced-motion fallback.
+ * Error Handling: Undefined CSS variables fall back to browser defaults; missing DOM elements are ignored.
+ * Notes:
+ *   - --vh and --scroll variables require JavaScript initialization (likely in main.js or utils.js).
+ *   - Parallax (.parallax) and intersection observer (.hidden/.visible) require JavaScript (components.js or utils.js).
+ *   - Prefers-reduced-motion query ensures accessibility by disabling animations.
+ *   - Recommend defining --secondary-gradient in themes.css to align with responsive.css.
+ * Last Modified: June 6, 2025 - Updated for responsive screen fitting.
+ */
+
+/**
+ * Reset and Base Styles
+ * Purpose: Resets browser defaults and sets consistent box-sizing for all elements.
+ * Usage: Ensures predictable layout across browsers.
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/**
+ * Body Styles
+ * Purpose: Sets typography, background, and layout for the entire page.
+ * Integration: Uses --primary-gradient and --text-primary from themes.css; --vh requires JavaScript (e.g., setVH in utils.js).
+ * Notes: min-height uses --vh for full viewport height; transition enables smooth theme changes.
+ */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--primary-gradient);
+  min-height: calc(var(--vh) * 100);
+  color: var(--text-primary);
+  line-height: 1.6;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 0.5s ease;
+}
+
+/**
+ * Body Background Overlay
+ * Purpose: Adds a subtle, animated shimmer effect with radial gradients for visual depth.
+ * Integration: Fixed pseudo-element with z-index -2 to sit behind content.
+ * Notes: Animation is disabled for prefers-reduced-motion users.
+ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 2px, transparent 2px),
+              radial-gradient(circle at 80% 30%, rgba(255,255,255,0.1) 1.5px, transparent 1.5px),
+              radial-gradient(circle at 60% 80%, rgba(255,255,255,0.08) 3px, transparent 3px);
+  animation: background-shimmer 20s ease-in-out infinite;
+  z-index: -2;
+}
+
+/**
+ * Background Shimmer Animation
+ * Purpose: Animates opacity and scale for the body::before overlay.
+ */
+@keyframes background-shimmer {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.1); }
+}
+
+/**
+ * Container Styles
+ * Purpose: Centers content with a max-width for responsive design.
+ * Integration: Wraps .profile-header, .link-grid, etc. in index.html; overridden by responsive.css for larger screens.
+ */
+.container {
+  max-width: 420px; /* Reduced to match provided HTML example */
+  margin: 0 auto;
+  padding: 40px 20px; /* Adjusted padding for consistency */
+  position: relative;
+  z-index: 1;
+}
+
+/**
+ * Main Element Styles
+ * Purpose: Ensures main content area has sufficient height.
+ * Integration: Applied to <main> in index.html; accounts for header/footer height (assumed 300px).
+ */
+main {
+  min-height: calc(100vh - 700px);
+}
+
+/**
+ * Link Styles
+ * Purpose: Normalizes link appearance for consistency.
+ * Integration: Applied to all <a> elements (e.g., .link-button, .social-footer__item).
+ */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/**
+ * Image Styles
+ * Purpose: Ensures images are responsive and maintain aspect ratio.
+ * Integration: Applied to .profile-header__image (img) and other images in index.html.
+ */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/**
+ * Focus Styles for Accessibility
+ * Purpose: Provides visible focus indicators for interactive elements.
+ * Integration: Uses --text-secondary from themes.css; applied to links, buttons, and selects (e.g., ThemeSwitcher, LanguageSwitcher).
+ */
+a:focus,
+button:focus,
+select:focus {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
+/**
+ * Parallax Effect
+ * Purpose: Applies a subtle scroll-based translation for parallax scrolling.
+ * Integration: Requires --scroll variable (set via JavaScript in main.js or utils.js); applied to .parallax elements (e.g., .floating-orb--[1-3]).
+ * Notes: transform uses --scroll * 0.2 for subtle movement.
+ */
+.parallax {
+  transform: translateY(calc(var(--scroll) * 0.2));
+}
+
+/**
+ * Intersection Observer Styles
+ * Purpose: Animates elements into view with opacity and Y translation.
+ * Integration: Requires JavaScript (IntersectionObserver in components.js or utils.js) to toggle .hidden/.visible classes.
+ * Usage: Applied to elements like .link-button for fade-in effects.
+ */
+.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/**
+ * Ripple Effect
+ * Purpose: Creates a click/tap ripple animation for interactive elements.
+ * Integration: Applied to .ripple elements (e.g., .link-button); requires JavaScript to trigger ::after on click.
+ * Notes: Animation is disabled for prefers-reduced-motion users.
+ */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/**
+ * Ripple Animation
+ * Purpose: Animates the ripple effect’s scale and opacity.
+ */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/**
+ * Reduced Motion Preference
+ * Purpose: Disables animations and transitions for users preferring reduced motion.
+ * Integration: Applied globally to all elements and pseudo-elements.
+ * Notes: Ensures accessibility compliance (WCAG 2.1).
+ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* RTL Support for Arabic */
+[lang="ar"] {
+  direction: rtl;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%; /* Full width on small screens */
+    padding: 30px 16px; /* Reduced padding for compactness */
+  }
+
+  main {
+    min-height: calc(100vh - 200px); /* Adjusted for smaller header/footer on mobile */
+  }
+}

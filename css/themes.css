@@ -1,0 +1,646 @@
+/**
+ * themes.css
+ * 
+ * Purpose: Defines theme-specific styles and CSS custom properties for the Linktree-style website, enabling theme switching via class-based overrides.
+ * Dependencies: Relies on themes.js for theme IDs, index.html for DOM structure, and components.js for theme application.
+ * Usage: Applied by ThemeSwitcher in components.js, which adds theme--${id} classes to <body> based on user selection or default settings.
+ * Performance Notes: Uses CSS custom properties for efficient style reuse; minimal specificity ensures fast rendering.
+ * Error Handling: Falls back to :root variables if theme classes are missing or invalid.
+ * Themes: dark, light, sunset, midnight, forest, neon, desert, ocean, galaxy, lava, pastel, cyberpunk.
+ * Last Modified: June 4, 2025 - Initial documentation creation.
+ */
+
+/**
+ * Theme Variables
+ * Purpose: Defines default CSS custom properties under :root, providing fallback styles for all themes.
+ * Scope: Global; available to all elements unless overridden by theme-specific classes.
+ * Usage: Applied to elements styled with --primary-gradient, --background, etc., in components.css, buttons.css, etc.
+ */
+:root {
+  /* Colors */
+  --primary-gradient: linear-gradient(135deg, #00FFED 0%, #007acc 100%);
+  --secondary-gradient: var(--primary-gradient);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --background: #0a0a23;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+
+  /* Shadows */
+  --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.2);
+}
+
+/* Theme-specific overrides */
+/* A - Aurora Borealis Theme */
+.theme--aurora {
+  --primary-gradient: linear-gradient(135deg, #00ff87 0%, #60efff 50%, #b967db 100%);
+  --secondary-gradient: linear-gradient(135deg, #33ff99 0%, #7af1ff 50%, #c87ee6 100%);
+  --shadow-light: 0 8px 32px rgba(0, 255, 135, 0.3);
+  --shadow-hover: 0 12px 40px rgba(96, 239, 255, 0.4);
+}
+
+.theme--aurora .floating-orb--1 {
+  background: radial-gradient(circle, rgba(0, 255, 135, 0.3), rgba(96, 239, 255, 0.2));
+}
+
+.theme--aurora .floating-orb--2 {
+  background: radial-gradient(circle, rgba(96, 239, 255, 0.3), rgba(185, 103, 219, 0.2));
+}
+
+.theme--aurora .floating-orb--3 {
+  background: radial-gradient(circle, rgba(51, 255, 153, 0.25), rgba(200, 126, 230, 0.15));
+}
+
+/* B - Blazing Sunset Theme */
+.theme--blazing {
+  --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcd3c 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff8052 0%, #f9a54c 50%, #ffd55e 100%);
+  --shadow-light: 0 8px 32px rgba(247, 147, 30, 0.3);
+  --shadow-hover: 0 12px 40px rgba(255, 205, 60, 0.4);
+}
+
+.theme--blazing .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.3), rgba(247, 147, 30, 0.2));
+}
+
+.theme--blazing .floating-orb--2 {
+  background: radial-gradient(circle, rgba(247, 147, 30, 0.3), rgba(255, 205, 60, 0.2));
+}
+
+.theme--blazing .floating-orb--3 {
+  background: radial-gradient(circle, rgba(255, 128, 82, 0.25), rgba(255, 213, 94, 0.15));
+}
+
+/* C - Cosmic Nebula Theme */
+.theme--cosmic {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  --secondary-gradient: linear-gradient(135deg, #7a8fef 0%, #8a5fb5 50%, #f2a6fc 100%);
+  --shadow-light: 0 8px 32px rgba(118, 75, 162, 0.3);
+  --shadow-hover: 0 12px 40px rgba(240, 147, 251, 0.4);
+}
+
+.theme--cosmic .floating-orb--1 {
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.2));
+}
+
+.theme--cosmic .floating-orb--2 {
+  background: radial-gradient(circle, rgba(118, 75, 162, 0.3), rgba(240, 147, 251, 0.2));
+}
+
+.theme--cosmic .floating-orb--3 {
+  background: radial-gradient(circle, rgba(122, 143, 239, 0.25), rgba(242, 166, 252, 0.15));
+}
+
+/* D - Deep Ocean Theme */
+.theme--deep-ocean {
+  --primary-gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #74b9ff 100%);
+  --secondary-gradient: linear-gradient(135deg, #2e4c82 0%, #3a62a8 50%, #84c9ff 100%);
+  --shadow-light: 0 8px 32px rgba(42, 82, 152, 0.3);
+  --shadow-hover: 0 12px 40px rgba(116, 185, 255, 0.4);
+}
+
+.theme--deep-ocean .floating-orb--1 {
+  background: radial-gradient(circle, rgba(30, 60, 114, 0.3), rgba(42, 82, 152, 0.2));
+}
+
+.theme--deep-ocean .floating-orb--2 {
+  background: radial-gradient(circle, rgba(42, 82, 152, 0.3), rgba(116, 185, 255, 0.2));
+}
+
+.theme--deep-ocean .floating-orb--3 {
+  background: radial-gradient(circle, rgba(46, 76, 130, 0.25), rgba(132, 201, 255, 0.15));
+}
+
+/* E - Emerald Forest Theme */
+.theme--emerald {
+  --primary-gradient: linear-gradient(135deg, #134e5e 0%, #71b280 50%, #a8e6cf 100%);
+  --secondary-gradient: linear-gradient(135deg, #235e6e 0%, #81c290 50%, #b8f6df 100%);
+  --shadow-light: 0 8px 32px rgba(113, 178, 128, 0.3);
+  --shadow-hover: 0 12px 40px rgba(168, 230, 207, 0.4);
+}
+
+.theme--emerald .floating-orb--1 {
+  background: radial-gradient(circle, rgba(19, 78, 94, 0.3), rgba(113, 178, 128, 0.2));
+}
+
+.theme--emerald .floating-orb--2 {
+  background: radial-gradient(circle, rgba(113, 178, 128, 0.3), rgba(168, 230, 207, 0.2));
+}
+
+.theme--emerald .floating-orb--3 {
+  background: radial-gradient(circle, rgba(35, 94, 110, 0.25), rgba(184, 246, 223, 0.15));
+}
+
+/* F - Frozen Tundra Theme */
+.theme--frozen {
+  --primary-gradient: linear-gradient(90deg, #e6f3ff 0%, #b3d9ff 50%, #7ec8e3 100%);
+  --secondary-gradient: linear-gradient(90deg, #f0faff 0%, #c3e9ff 50%, #8ed8f3 100%);
+  --text-primary: #1a3c5e; /* Dark navy for high contrast */
+  --text-secondary: rgba(26, 60, 94, 0.7); /* Adjusted opacity for secondary text */
+  --text-muted: rgba(26, 60, 94, 0.5); /* Adjusted opacity for muted text */
+  --shadow-light: 0 4px 16px rgba(126, 200, 227, 0.3), 0 0 20px rgba(200, 230, 255, 0.5), 0 0 40px rgba(150, 200, 255, 0.3); /* Glowing icy shadow */
+  --shadow-hover: 0 8px 24px rgba(126, 200, 227, 0.4), 0 0 30px rgba(200, 230, 255, 0.7), 0 0 60px rgba(150, 200, 255, 0.4); /* Enhanced glow on hover */
+  --glass-bg: rgba(200, 230, 255, 0.15); /* Frosty blue-tinted glass */
+  --glass-border: rgba(200, 230, 255, 0.3); /* Subtle icy border */
+}
+
+.theme--frozen .floating-orb--1 {
+  background: radial-gradient(circle, rgba(230, 243, 255, 0.3), rgba(179, 217, 255, 0.2));
+}
+
+.theme--frozen .floating-orb--2 {
+  background: radial-gradient(circle, rgba(179, 217, 255, 0.3), rgba(126, 200, 227, 0.2));
+}
+
+.theme--frozen .floating-orb--3 {
+  background: radial-gradient(circle, rgba(240, 250, 255, 0.25), rgba(142, 216, 243, 0.15));
+}
+
+/* Ensure text color and glowing shadows apply to buttons and labels */
+.theme--frozen .link-button,
+.theme--frozen .site-footer__github,
+.theme--frozen .theme-switcher,
+.theme--frozen .language-switcher {
+  color: var(--text-primary);
+  box-shadow: var(--shadow-light);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+.theme--frozen .link-button:hover,
+.theme--frozen .site-footer__github:hover,
+.theme--frozen .theme-switcher:hover,
+.theme--frozen .language-switcher:hover {
+  box-shadow: var(--shadow-hover);
+  background: rgba(200, 230, 255, 0.25); /* Slightly brighter hover background */
+}
+
+.theme--frozen .link-button__title,
+.theme--frozen .link-button__subtitle,
+.theme--frozen .gradient-label {
+  color: var(--text-primary);
+}
+
+.theme--frozen .link-button__subtitle {
+  color: var(--text-muted);
+}
+
+.theme--frozen .link-button__icon {
+  background: rgba(200, 230, 255, 0.2); /* Frosty blue icon background */
+  border: 1px solid rgba(200, 230, 255, 0.3);
+}
+
+/* Adjust pulse effect for Frozen theme to match glowing aesthetic */
+.theme--frozen .link-button--pulse::after {
+  background: rgba(200, 230, 255, 0.6); /* Icy blue-white pulse */
+  box-shadow: 0 0 10px rgba(200, 230, 255, 0.8); /* Glowing pulse effect */
+}
+
+/* G - Golden Hour Theme */
+.theme--golden {
+  --primary-gradient: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 50%, #e84393 100%);
+  --secondary-gradient: linear-gradient(135deg, #ffefb7 0%, #fed57e 50%, #ed53a3 100%);
+  --shadow-light: 0 8px 32px rgba(253, 203, 110, 0.3);
+  --shadow-hover: 0 12px 40px rgba(232, 67, 147, 0.4);
+}
+
+.theme--golden .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 234, 167, 0.3), rgba(253, 203, 110, 0.2));
+}
+
+.theme--golden .floating-orb--2 {
+  background: radial-gradient(circle, rgba(253, 203, 110, 0.3), rgba(232, 67, 147, 0.2));
+}
+
+.theme--golden .floating-orb--3 {
+  background: radial-gradient(circle, rgba(255, 239, 183, 0.25), rgba(237, 83, 163, 0.15));
+}
+
+/* H - Heavenly Clouds Theme */
+.theme--heavenly {
+  --primary-gradient: linear-gradient(135deg, #f7f1e3 0%, #ffeaa7 50%, #fab1a0 100%);
+  --secondary-gradient: linear-gradient(135deg, #faf6e8 0%, #ffefb7 50%, #fbc1b0 100%);
+  --shadow-light: 0 8px 32px rgba(255, 234, 167, 0.3);
+  --shadow-hover: 0 12px 40px rgba(250, 177, 160, 0.4);
+}
+
+.theme--heavenly .floating-orb--1 {
+  background: radial-gradient(circle, rgba(247, 241, 227, 0.3), rgba(255, 234, 167, 0.2));
+}
+
+.theme--heavenly .floating-orb--2 {
+  background: radial-gradient(circle, rgba(255, 234, 167, 0.3), rgba(250, 177, 160, 0.2));
+}
+
+.theme--heavenly .floating-orb--3 {
+  background: radial-gradient(circle, rgba(250, 246, 232, 0.25), rgba(251, 193, 176, 0.15));
+}
+
+/* I - Icy Mountain Theme */
+.theme--icy {
+  --primary-gradient: linear-gradient(135deg, #ddd6fe 0%, #a5b4fc 50%, #60a5fa 100%);
+  --secondary-gradient: linear-gradient(135deg, #e7e0ff 0%, #b5c4fc 50%, #70b5fa 100%);
+  --shadow-light: 0 8px 32px rgba(165, 180, 252, 0.3);
+  --shadow-hover: 0 12px 40px rgba(96, 165, 250, 0.4);
+}
+
+.theme--icy .floating-orb--1 {
+  background: radial-gradient(circle, rgba(221, 214, 254, 0.3), rgba(165, 180, 252, 0.2));
+}
+
+.theme--icy .floating-orb--2 {
+  background: radial-gradient(circle, rgba(165, 180, 252, 0.3), rgba(96, 165, 250, 0.2));
+}
+
+.theme--icy .floating-orb--3 {
+  background: radial-gradient(circle, rgba(231, 224, 255, 0.25), rgba(112, 181, 250, 0.15));
+}
+
+/* J - Jungle Canopy Theme */
+.theme--jungle {
+  --primary-gradient: linear-gradient(135deg, #0d7377 0%, #14a085 50%, #7fb069 100%);
+  --secondary-gradient: linear-gradient(135deg, #1d8387 0%, #24b095 50%, #8fc079 100%);
+  --shadow-light: 0 8px 32px rgba(20, 160, 133, 0.3);
+  --shadow-hover: 0 12px 40px rgba(127, 176, 105, 0.4);
+}
+
+.theme--jungle .floating-orb--1 {
+  background: radial-gradient(circle, rgba(13, 115, 119, 0.3), rgba(20, 160, 133, 0.2));
+}
+
+.theme--jungle .floating-orb--2 {
+  background: radial-gradient(circle, rgba(20, 160, 133, 0.3), rgba(127, 176, 105, 0.2));
+}
+
+.theme--jungle .floating-orb--3 {
+  background: radial-gradient(circle, rgba(29, 131, 135, 0.25), rgba(143, 192, 121, 0.15));
+}
+
+/* K - Kaleidoscope Dream Theme */
+.theme--kaleidoscope {
+  --primary-gradient: linear-gradient(135deg, #ff006e 0%, #8338ec 50%, #3a86ff 75%, #06ffa5 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff1a7e 0%, #9348fc 50%, #4a96ff 75%, #16ffb5 100%);
+  --shadow-light: 0 8px 32px rgba(131, 56, 236, 0.3);
+  --shadow-hover: 0 12px 40px rgba(58, 134, 255, 0.4);
+}
+
+.theme--kaleidoscope .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 0, 110, 0.3), rgba(131, 56, 236, 0.2));
+}
+
+.theme--kaleidoscope .floating-orb--2 {
+  background: radial-gradient(circle, rgba(131, 56, 236, 0.3), rgba(58, 134, 255, 0.2));
+}
+
+.theme--kaleidoscope .floating-orb--3 {
+  background: radial-gradient(circle, rgba(58, 134, 255, 0.25), rgba(6, 255, 165, 0.15));
+}
+
+/* L - Lavender Fields Theme */
+.theme--lavender {
+  --primary-gradient: linear-gradient(135deg, #c39bd3 0%, #bb8fce 50%, #a569bd 100%);
+  --secondary-gradient: linear-gradient(135deg, #cdabe3 0%, #c59fde 50%, #b579cd 100%);
+  --shadow-light: 0 8px 32px rgba(187, 143, 206, 0.3);
+  --shadow-hover: 0 12px 40px rgba(165, 105, 189, 0.4);
+}
+
+.theme--lavender .floating-orb--1 {
+  background: radial-gradient(circle, rgba(195, 155, 211, 0.3), rgba(187, 143, 206, 0.2));
+}
+
+.theme--lavender .floating-orb--2 {
+  background: radial-gradient(circle, rgba(187, 143, 206, 0.3), rgba(165, 105, 189, 0.2));
+}
+
+.theme--lavender .floating-orb--3 {
+  background: radial-gradient(circle, rgba(205, 171, 227, 0.25), rgba(181, 121, 205, 0.15));
+}
+
+/* M - Midnight Sky Theme */
+.theme--midnight-sky {
+  --primary-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+  --secondary-gradient: linear-gradient(135deg, #1c1c1c 0%, #2a2a3e 50%, #26314e 100%);
+  --shadow-light: 0 8px 32px rgba(26, 26, 46, 0.3);
+  --shadow-hover: 0 12px 40px rgba(22, 33, 62, 0.4);
+}
+
+.theme--midnight-sky .floating-orb--1 {
+  background: radial-gradient(circle, rgba(12, 12, 12, 0.3), rgba(26, 26, 46, 0.2));
+}
+
+.theme--midnight-sky .floating-orb--2 {
+  background: radial-gradient(circle, rgba(26, 26, 46, 0.3), rgba(22, 33, 62, 0.2));
+}
+
+.theme--midnight-sky .floating-orb--3 {
+  background: radial-gradient(circle, rgba(28, 28, 28, 0.25), rgba(38, 49, 78, 0.15));
+}
+
+/* N - Northern Lights Theme */
+.theme--northern {
+  --primary-gradient: linear-gradient(135deg, #00b4db 0%, #0083b0 50%, #004d7a 100%);
+  --secondary-gradient: linear-gradient(135deg, #10c4eb 0%, #1893c0 50%, #105d8a 100%);
+  --shadow-light: 0 8px 32px rgba(0, 131, 176, 0.3);
+  --shadow-hover: 0 12px 40px rgba(0, 77, 122, 0.4);
+}
+
+.theme--northern .floating-orb--1 {
+  background: radial-gradient(circle, rgba(0, 180, 219, 0.3), rgba(0, 131, 176, 0.2));
+}
+
+.theme--northern .floating-orb--2 {
+  background: radial-gradient(circle, rgba(0, 131, 176, 0.3), rgba(0, 77, 122, 0.2));
+}
+
+.theme--northern .floating-orb--3 {
+  background: radial-gradient(circle, rgba(16, 196, 235, 0.25), rgba(16, 93, 138, 0.15));
+}
+
+/* O - Ocean Waves Theme */
+.theme--ocean-waves {
+  --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 50%, #2980b9 100%);
+  --secondary-gradient: linear-gradient(135deg, #10e2ff 0%, #4a8be5 50%, #399bc9 100%);
+  --shadow-light: 0 8px 32px rgba(58, 123, 213, 0.3);
+  --shadow-hover: 0 12px 40px rgba(41, 128, 185, 0.4);
+}
+
+.theme--ocean-waves .floating-orb--1 {
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.3), rgba(58, 123, 213, 0.2));
+}
+
+.theme--ocean-waves .floating-orb--2 {
+  background: radial-gradient(circle, rgba(58, 123, 213, 0.3), rgba(41, 128, 185, 0.2));
+}
+
+.theme--ocean-waves .floating-orb--3 {
+  background: radial-gradient(circle, rgba(16, 226, 255, 0.25), rgba(57, 155, 201, 0.15));
+}
+
+/* P - Peacock Feather Theme */
+.theme--peacock {
+  --primary-gradient: linear-gradient(135deg, #009688 0%, #00acc1 50%, #29b6f6 100%);
+  --secondary-gradient: linear-gradient(135deg, #10a698 0%, #10bcd1 50%, #39c6ff 100%);
+  --shadow-light: 0 8px 32px rgba(0, 172, 193, 0.3);
+  --shadow-hover: 0 12px 40px rgba(41, 182, 246, 0.4);
+}
+
+.theme--peacock .floating-orb--1 {
+  background: radial-gradient(circle, rgba(0, 150, 136, 0.3), rgba(0, 172, 193, 0.2));
+}
+
+.theme--peacock .floating-orb--2 {
+  background: radial-gradient(circle, rgba(0, 172, 193, 0.3), rgba(41, 182, 246, 0.2));
+}
+
+.theme--peacock .floating-orb--3 {
+  background: radial-gradient(circle, rgba(16, 166, 152, 0.25), rgba(57, 198, 255, 0.15));
+}
+
+/* Q - Quartz Crystal Theme */
+.theme--quartz {
+  --primary-gradient: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #ced4da 100%);
+  --secondary-gradient: linear-gradient(135deg, #fafafa 0%, #f1f3f4 50%, #d6dbe0 100%);
+  --text-primary: #1a3c5e; /* Dark navy for high contrast */
+  --text-secondary: rgba(26, 60, 94, 0.7); /* Adjusted opacity for secondary text */
+  --text-muted: rgba(26, 60, 94, 0.5); /* Adjusted opacity for muted text */
+  --shadow-light: 0 4px 16px rgba(206, 212, 218, 0.3), 0 0 20px rgba(240, 240, 255, 0.5), 0 0 40px rgba(200, 220, 255, 0.3); /* Glowing shadow */
+  --shadow-hover: 0 8px 24px rgba(206, 212, 218, 0.4), 0 0 30px rgba(240, 240, 255, 0.7), 0 0 60px rgba(200, 220, 255, 0.4); /* Enhanced glow on hover */
+  --glass-bg: rgba(255, 255, 255, 0.15); /* Slightly brighter glass for quartz */
+  --glass-border: rgba(200, 220, 255, 0.3); /* Subtle blue-tinted border */
+}
+
+.theme--quartz .floating-orb--1 {
+  background: radial-gradient(circle, rgba(248, 249, 250, 0.3), rgba(233, 236, 239, 0.2));
+}
+
+.theme--quartz .floating-orb--2 {
+  background: radial-gradient(circle, rgba(233, 236, 239, 0.3), rgba(206, 212, 218, 0.2));
+}
+
+.theme--quartz .floating-orb--3 {
+  background: radial-gradient(circle, rgba(250, 250, 250, 0.25), rgba(214, 219, 224, 0.15));
+}
+
+/* Ensure text color and glowing shadows apply to buttons and labels */
+.theme--quartz .link-button,
+.theme--quartz .site-footer__github,
+.theme--quartz .theme-switcher,
+.theme--quartz .language-switcher {
+  color: var(--text-primary);
+  box-shadow: var(--shadow-light);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+.theme--quartz .link-button:hover,
+.theme--quartz .site-footer__github:hover,
+.theme--quartz .theme-switcher:hover,
+.theme--quartz .language-switcher:hover {
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.theme--quartz .link-button__title,
+.theme--quartz .link-button__subtitle,
+.theme--quartz .gradient-label {
+  color: var(--text-primary);
+}
+
+.theme--quartz .link-button__subtitle {
+  color: var(--text-muted);
+}
+
+.theme--quartz .link-button__icon {
+  background: rgba(200, 220, 255, 0.2); /* Subtle blue-tinted icon background */
+  border: 1px solid rgba(200, 220, 255, 0.3);
+}
+
+/* Adjust pulse effect for Quartz theme to match glowing aesthetic */
+.theme--quartz .link-button--pulse::after {
+  background: rgba(240, 240, 255, 0.6); /* Light blue-white pulse */
+  box-shadow: 0 0 10px rgba(240, 240, 255, 0.8); /* Glowing pulse effect */
+}
+
+/* R - Ruby Flame Theme */
+.theme--ruby {
+  --primary-gradient: linear-gradient(135deg, #ff1744 0%, #e91e63 50%, #9c27b0 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff2754 0%, #f92e73 50%, #ac37c0 100%);
+  --shadow-light: 0 8px 32px rgba(233, 30, 99, 0.3);
+  --shadow-hover: 0 12px 40px rgba(156, 39, 176, 0.4);
+}
+
+.theme--ruby .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 23, 68, 0.3), rgba(233, 30, 99, 0.2));
+}
+
+.theme--ruby .floating-orb--2 {
+  background: radial-gradient(circle, rgba(233, 30, 99, 0.3), rgba(156, 39, 176, 0.2));
+}
+
+.theme--ruby .floating-orb--3 {
+  background: radial-gradient(circle, rgba(255, 39, 84, 0.25), rgba(172, 55, 192, 0.15));
+}
+
+/* S - Summer Breeze Theme */
+.theme--summer {
+  --primary-gradient: linear-gradient(135deg, #74b9ff 0%, #0984e3 50%, #a29bfe 100%);
+  --secondary-gradient: linear-gradient(135deg, #84c9ff 0%, #1994f3 50%, #b2abfe 100%);
+  --shadow-light: 0 8px 32px rgba(9, 132, 227, 0.3);
+  --shadow-hover: 0 12px 40px rgba(162, 155, 254, 0.4);
+}
+
+.theme--summer .floating-orb--1 {
+  background: radial-gradient(circle, rgba(116, 185, 255, 0.3), rgba(9, 132, 227, 0.2));
+}
+
+.theme--summer .floating-orb--2 {
+  background: radial-gradient(circle, rgba(9, 132, 227, 0.3), rgba(162, 155, 254, 0.2));
+}
+
+.theme--summer .floating-orb--3 {
+  background: radial-gradient(circle, rgba(132, 201, 255, 0.25), rgba(178, 171, 254, 0.15));
+}
+
+/* T - Tropical Paradise Theme */
+.theme--tropical {
+  --primary-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  --secondary-gradient: linear-gradient(135deg, #ffaaae 0%, #fedfff 50%, #fedfff 100%);
+  --shadow-light: 0 8px 32px rgba(254, 207, 239, 0.3);
+  --shadow-hover: 0 12px 40px rgba(254, 207, 239, 0.4);
+}
+
+.theme--tropical .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 154, 158, 0.3), rgba(254, 207, 239, 0.2));
+}
+
+.theme--tropical .floating-orb--2 {
+  background: radial-gradient(circle, rgba(254, 207, 239, 0.3), rgba(254, 207, 239, 0.2));
+}
+
+.theme--tropical .floating-orb--3 {
+  background: radial-gradient(circle, rgba(255, 170, 174, 0.25), rgba(254, 223, 255, 0.15));
+}
+
+/* U - Urban Neon Theme */
+.theme--urban {
+  --primary-gradient: linear-gradient(135deg, #ff0080 0%, #7928ca 50%, #0070f3 100%);
+  --secondary-gradient: linear-gradient(135deg, #ff1090 0%, #8938da 50%, #1080ff 100%);
+  --shadow-light: 0 8px 32px rgba(121, 40, 202, 0.3);
+  --shadow-hover: 0 12px 40px rgba(0, 112, 243, 0.4);
+}
+
+.theme--urban .floating-orb--1 {
+  background: radial-gradient(circle, rgba(255, 0, 128, 0.3), rgba(121, 40, 202, 0.2));
+}
+
+.theme--urban .floating-orb--2 {
+  background: radial-gradient(circle, rgba(121, 40, 202, 0.3), rgba(0, 112, 243, 0.2));
+}
+
+.theme--urban .floating-orb--3 {
+  background: radial-gradient(circle, rgba(255, 16, 144, 0.25), rgba(16, 128, 255, 0.15));
+}
+
+/* V - Velvet Rose Theme */
+.theme--velvet {
+  --primary-gradient: linear-gradient(135deg, #8e44ad 0%, #c0392b 50%, #e74c3c 100%);
+  --secondary-gradient: linear-gradient(135deg, #9e54bd 0%, #d0493b 50%, #f75c4c 100%);
+  --shadow-light: 0 8px 32px rgba(192, 57, 43, 0.3);
+  --shadow-hover: 0 12px 40px rgba(231, 76, 60, 0.4);
+}
+
+.theme--velvet .floating-orb--1 {
+  background: radial-gradient(circle, rgba(142, 68, 173, 0.3), rgba(192, 57, 43, 0.2));
+}
+
+.theme--velvet .floating-orb--2 {
+  background: radial-gradient(circle, rgba(192, 57, 43, 0.3), rgba(231, 76, 60, 0.2));
+}
+
+.theme--velvet .floating-orb--3 {
+  background: radial-gradient(circle, rgba(158, 84, 189, 0.25), rgba(247, 92, 76, 0.15));
+}
+
+/* W - Winter Morning Theme */
+.theme--winter {
+  --primary-gradient: linear-gradient(135deg, #e8f5e8 0%, #b8e6b8 50%, #4f98cd 100%);
+  --secondary-gradient: linear-gradient(135deg, #f0f8f0 0%, #c8f6c8 50%, #5fa8dd 100%);
+  --shadow-light: 0 8px 32px rgba(184, 230, 184, 0.3);
+  --shadow-hover: 0 12px 40px rgba(79, 152, 205, 0.4);
+}
+
+.theme--winter .floating-orb--1 {
+  background: radial-gradient(circle, rgba(232, 245, 232, 0.3), rgba(184, 230, 184, 0.2));
+}
+
+.theme--winter .floating-orb--2 {
+  background: radial-gradient(circle, rgba(184, 230, 184, 0.3), rgba(79, 152, 205, 0.2));
+}
+
+.theme--winter .floating-orb--3 {
+  background: radial-gradient(circle, rgba(240, 248, 240, 0.25), rgba(95, 168, 221, 0.15));
+}
+
+/* X - X-Ray Vision Theme */
+.theme--xray {
+  --primary-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #7f8c8d 100%);
+  --secondary-gradient: linear-gradient(135deg, #3c4e60 0%, #44596e 50%, #8f9c9d 100%);
+  --shadow-light: 0 8px 32px rgba(52, 73, 94, 0.3);
+  --shadow-hover: 0 12px 40px rgba(127, 140, 141, 0.4);
+}
+
+.theme--xray .floating-orb--1 {
+  background: radial-gradient(circle, rgba(44, 62, 80, 0.3), rgba(52, 73, 94, 0.2));
+}
+
+.theme--xray .floating-orb--2 {
+  background: radial-gradient(circle, rgba(52, 73, 94, 0.3), rgba(127, 140, 141, 0.2));
+}
+
+.theme--xray .floating-orb--3 {
+  background: radial-gradient(circle, rgba(60, 78, 96, 0.25), rgba(143, 156, 157, 0.15));
+}
+
+/* Y - Yellow Sunrise Theme */
+.theme--yellow {
+  --primary-gradient: linear-gradient(135deg, #fed330 0%, #f7b731 50%, #fa8231 100%);
+  --secondary-gradient: linear-gradient(135deg, #fee340 0%, #f8c741 50%, #fb9241 100%);
+  --shadow-light: 0 8px 32px rgba(247, 183, 49, 0.3);
+  --shadow-hover: 0 12px 40px rgba(250, 130, 49, 0.4);
+}
+
+.theme--yellow .floating-orb--1 {
+  background: radial-gradient(circle, rgba(254, 211, 48, 0.3), rgba(247, 183, 49, 0.2));
+}
+
+.theme--yellow .floating-orb--2 {
+  background: radial-gradient(circle, rgba(247, 183, 49, 0.3), rgba(250, 130, 49, 0.2));
+}
+
+.theme--yellow .floating-orb--3 {
+  background: radial-gradient(circle, rgba(254, 227, 64, 0.25), rgba(251, 146, 65, 0.15));
+}
+
+/* Z - Zen Garden Theme */
+.theme--zen {
+  --primary-gradient: linear-gradient(135deg, #2d3436 0%, #636e72 50%, #b2bec3 100%);
+  --secondary-gradient: linear-gradient(135deg, #3d4446 0%, #737e82 50%, #c2ced3 100%);
+  --shadow-light: 0 8px 32px rgba(99, 110, 114, 0.3);
+  --shadow-hover: 0 12px 40px rgba(178, 190, 195, 0.4);
+}
+
+.theme--zen .floating-orb--1 {
+  background: radial-gradient(circle, rgba(45, 52, 54, 0.3), rgba(99, 110, 114, 0.2));
+}
+
+.theme--zen .floating-orb--2 {
+  background: radial-gradient(circle, rgba(99, 110, 114, 0.3), rgba(178, 190, 195, 0.2));
+}
+
+.theme--zen .floating-orb--3 {
+  background: radial-gradient(circle, rgba(61, 68, 70, 0.25), rgba(194, 206, 211, 0.15));
+}

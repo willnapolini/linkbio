@@ -1,0 +1,101 @@
+/**
+ * responsive.css
+ * 
+ * Purpose: Defines media queries for responsive design and a dark mode preference for the Linktree-style website, ensuring optimal layout and styling across mobile, tablet, desktop, and dark mode.
+ * Dependencies: Relies on themes.css for CSS custom properties (--primary-gradient, --text-muted, etc.) and components.css for base styles (.container, .link-button, etc.).
+ * Usage: Applied globally to index.html elements via <link> tag, modifies layout and styles based on viewport width and user color scheme preference.
+ * Performance Notes: Minimal rules with efficient selectors; media queries are optimized for common breakpoints (768px, 1024px).
+ * Error Handling: Assumes base styles in components.css; invalid CSS variables fall back to browser defaults.
+ * Notes:
+ *   - The prefers-color-scheme: dark query may conflict with ThemeSwitcher logic in components.js or theme--dark styles in themes.css.
+ *   - Recommend aligning dark mode styles with .theme--dark in themes.css to avoid overrides.
+ * Last Modified: June 6, 2025 - Updated to enforce mobile-style single-column grid for all viewports.
+ */
+
+ /* Mobile (base styles are mobile-first in components.css) */
+ /* No specific mobile rules here; base styles apply for viewports < 768px */
+
+ /**
+  * Tablet Breakpoint
+  * Purpose: Adjusts layout and typography for tablet-sized viewports (>= 768px), maintaining mobile-style single-column grid.
+  */
+ @media (min-width: 768px) {
+   .container {
+     max-width: 600px;
+     padding: 48px 24px;
+   }
+
+   .profile-header__image {
+     width: 160px;
+     height: 160px;
+   }
+
+   .profile-header__name {
+     font-size: 36px;
+   }
+
+   .profile-header__bio {
+     font-size: 18px;
+   }
+
+   .link-grid {
+     grid-template-columns: 1fr; /* Enforce single-column layout */
+     gap: 20px;
+   }
+
+   .link-button {
+     padding: 24px;
+     min-height: 72px;
+   }
+
+   .link-button__icon {
+     width: 48px;
+     height: 48px;
+     font-size: 24px;
+   }
+
+   .link-button__title {
+     font-size: 20px;
+   }
+
+   .social-footer {
+     gap: 20px;
+   }
+ }
+
+ /**
+  * Desktop Breakpoint
+  * Purpose: Optimizes layout and typography for desktop-sized viewports (>= 1024px), maintaining mobile-style single-column grid.
+  */
+ @media (min-width: 1024px) {
+   .container {
+     max-width: 800px;
+     padding: 60px 32px;
+   }
+
+   .profile-header__image {
+     width: 180px;
+     height: 180px;
+   }
+
+   .profile-header__name {
+     font-size: 40px;
+   }
+
+   .link-grid {
+     grid-template-columns: 1fr; /* Enforce single-column layout */
+     gap: 16px;
+   }
+
+   .link-button {
+     min-height: 80px;
+   }
+
+   .link-button__subtitle {
+     display: block; /* Show subtitles on desktop, consistent with mobile */
+     font-size: 14px;
+     color: var(--text-muted);
+   }
+ }
+
+ @media (max-width: 767px) { body::before { display: none; } }

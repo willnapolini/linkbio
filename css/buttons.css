@@ -1,0 +1,263 @@
+/**
+ * buttons.css
+ * 
+ * Purpose: Defines styles for button-like components with enhanced Bento grid implementation for tablet and desktop views.
+ * Scope: Styles interactive elements in index.html, applied after main.css, themes.css, and components.css but before responsive.css.
+ * Dependencies: Relies on CSS variables from main.css or themes.css (e.g., --glass-bg, --text-primary).
+ * When to Modify: Update for new button styles, Bento grid layouts, or interactive effects.
+ * Performance Notes: Uses CSS Grid for efficient layout, GPU-accelerated transforms, and optimized animations.
+ * Last Modified: June 6, 2025 - Enhanced for better screen fitting and responsiveness.
+ */
+
+/* Link Button Base Styles */
+.link-button {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 20px 20px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+}
+
+.link-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 2px, transparent 2px),
+              radial-gradient(circle at 80% 30%, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 20px;
+}
+
+.link-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.link-button:hover::before {
+  opacity: 1;
+}
+
+.link-button__icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  line-height: 1;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+.link-button__icon > * {
+  font-size: 18px !important;
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.link-button__title {
+  font-size: 20px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  letter-spacing: -0.2px;
+  flex-grow: 1;
+}
+
+.link-button__subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  position: relative;
+  z-index: 2;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Pulse Effect */
+.link-button--pulse::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  opacity: 0;
+}
+
+.link-button--pulse:hover::after {
+  opacity: 1;
+}
+
+@keyframes pulse {
+  0% { transform: translateY(-50%) scale(1); opacity: 1; }
+  70% { transform: translateY(-50%) scale(1.5); opacity: 0; }
+  100% { transform: translateY(-50%) scale(1); opacity: 0; }
+}
+
+/* Enhanced Link Grid with Responsive Bento Layout */
+.link-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+
+/* Site Footer, Theme Switcher, Language Switcher */
+.site-footer {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
+  animation: fade-in 1s ease-out 0.5s both;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.site-footer__github {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.site-footer__github::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+              radial-gradient(circle at 75% 75%, rgba(255,255,255,0.08) 1.5px, transparent 1.5px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+}
+
+.site-footer__github:hover {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.site-footer__github:hover::before {
+  opacity: 1;
+}
+
+.theme-switcher {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  padding: 8px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  max-width: 100px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-light);
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  margin-bottom: 5px;
+}
+
+.theme-switcher:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.theme-switcher:focus {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
+.language-switcher {
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 8px;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  max-width: 130px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-light);
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.language-switcher:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.language-switcher:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 2px;
+}
+
