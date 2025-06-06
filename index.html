@@ -1,77 +1,232 @@
+<!--
+ * index.html
+ * 
+ * Purpose: Serves as the main entry point for the Linktree-style website, defining the structure, loading styles and scripts, and rendering the core UI components.
+ * Dependencies: CSS files (main.css, themes.css, components.css, buttons.css, responsive.css), JS file (main.js), assets (favicon.png, profile.jpg).
+ * Performance Notes: Uses lazy loading for images, deferred script loading, and modular CSS to optimize performance.
+ * Accessibility Notes: Semantic HTML, ARIA labels, and role attributes ensure accessibility for screen readers and keyboard navigation.
+ * Last Modified: June 4, 2025 - Initial documentation creation.
+-->
 <!DOCTYPE html>
+<!--
+ * DOCTYPE Declaration
+ * Purpose: Declares the document as HTML5, ensuring modern browser rendering and standards compliance.
+-->
 <html lang="en">
+<!--
+ * HTML Element
+ * Purpose: Root element with language set to English for accessibility and SEO.
+ * Parameters: lang="en" sets the document language, aiding screen readers and search engines.
+-->
 <head>
+    <!--
+     * Head Section
+     * Purpose: Contains metadata, stylesheets, and favicon for SEO, accessibility, and branding.
+    -->
     <meta charset="UTF-8">
+    <!--
+     * Meta Charset
+     * Purpose: Specifies UTF-8 encoding for universal character support, ensuring proper rendering of text.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will Napolini - Digital Creator</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <!--
+     * Meta Viewport
+     * Purpose: Ensures responsive design by setting viewport width to device width and initial zoom to 1.0.
+     * Usage: Critical for mobile responsiveness, defined in responsive.css.
+    -->
+    <meta name="description" content="Will Napolini's personal Linktree-style page with social media and language links.">
+    <!--
+     * Meta Description
+     * Purpose: Provides a concise summary for search engines, improving SEO.
+     * Usage: Displayed in search results to describe the page's content.
+    -->
+    <meta name="keywords" content="Will Napolini, digital creator, portfolio, links, social media">
+    <!--
+     * Meta Keywords
+     * Purpose: Lists relevant keywords for SEO, though modern search engines prioritize content over keywords.
+     * Usage: Helps categorize the page for search indexing.
+    -->
+    <meta name="author" content="Will Napolini">
+    <!--
+     * Meta Author
+     * Purpose: Identifies the page author, enhancing credibility and SEO.
+    -->
+    <!-- Open Graph / Twitter Card -->
+    <meta property="og:title" content="Will Napolini - Digital Creator">
+    <!--
+     * Open Graph Title
+     * Purpose: Defines the title for social media sharing (e.g., Facebook, LinkedIn).
+     * Usage: Ensures consistent branding when the page is shared.
+    -->
+    <meta property="og:description" content="Explore Will Napolini's links and social media profiles.">
+    <!--
+     * Open Graph Description
+     * Purpose: Provides a description for social media previews.
+    -->
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/192521042?s=400&u=61065e42741486686fae5490a1df64ef4c58f0f2&v=4">
+    <!--
+     * Open Graph Image
+     * Purpose: Specifies the image displayed in social media previews.
+     * Performance Notes: References profile.jpg, which is lazy-loaded to optimize performance.
+    -->
+    <meta property="og:url" content="https://yourusername.github.io">
+    <!--
+     * Open Graph URL
+     * Purpose: Defines the canonical URL for the page, ensuring consistent linking.
+    -->
+    <meta name="twitter:card" content="summary_large_image">
+    <!--
+     * Twitter Card
+     * Purpose: Configures Twitter to display a large image preview when shared.
+     * Dependencies: Relies on og:image for the preview image.
+    -->
+    <title>Will Napolini</title>
+    <!--
+     * Title
+     * Purpose: Sets the browser tab title, used for SEO and user orientation.
+    -->
+    <link rel="stylesheet" href="./css/main.css">
+    <!--
+     * Main CSS
+     * Purpose: Loads global styles, resets, and typography.
+     * Usage: Applied first to establish baseline styling.
+     * Performance Notes: Loaded synchronously as it contains critical CSS.
+    -->
+    <link rel="stylesheet" href="./css/themes.css">
+    <!--
+     * Themes CSS
+     * Purpose: Defines theme-specific styles (e.g., light/dark mode).
+     * Usage: Applied after main.css to override default styles based on theme selection.
+    -->
+    <link rel="stylesheet" href="./css/components.css">
+    <!--
+     * Components CSS
+     * Purpose: Styles reusable UI components (e.g., buttons, link cards).
+     * Usage: Applied after themes.css to ensure component-specific styles take precedence.
+    -->
+    <link rel="stylesheet" href="./css/buttons.css">
+    <!--
+     * Buttons CSS
+     * Purpose: Defines styles for button components, likely used in link cards.
+     * Usage: Separated for modularity, applied after components.css.
+    -->
+    <link rel="stylesheet" href="./css/responsive.css">
+    <!--
+     * Responsive CSS
+     * Purpose: Contains media queries for responsive layouts across devices.
+     * Usage: Loaded last to override styles based on screen size.
+    -->
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/192521042?s=400&u=61065e42741486686fae5490a1df64ef4c58f0f2&v=4">
+    <!--
+     * Favicon
+     * Purpose: Sets the browser tab icon for branding.
+     * Performance Notes: Small PNG file ensures fast loading.
+    -->
 </head>
 <body>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
-    <div class="floating-orb orb-3"></div>
-
+    <!--
+     * Body Section
+     * Purpose: Contains the visible content of the page, structured for accessibility and modularity.
+    -->
+    <!-- Floating Decorative Orbs -->
+    <div class="floating-orb floating-orb--1"></div>
+    <div class="floating-orb floating-orb--2"></div>
+    <div class="floating-orb floating-orb--3"></div>
+    <!--
+     * Floating Orbs
+     * Purpose: Decorative elements for visual appeal, styled in components.css.
+     * Usage: Animated via CSS (likely in components.css) to create a floating effect.
+     * Performance Notes: Lightweight CSS animations to avoid heavy JavaScript.
+    -->
     <div class="container">
-        <div class="profile-section">
-            <img class="profile-image" src="https://pbs.twimg.com/media/GppW-XPXUAAzUhs?format=png&name=small" alt="Profile photo of Will Napolini">
-            <h1 class="profile-name">Will Napolini</h1>
-            <p class="profile-bio">Mindset • Skillset • Toolset</p>
-        </div>
-
-        <nav class="social-section" aria-label="Social media links">
-            <a href="https://willonsuccess.com/" class="social-item" aria-label="Telegram">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22.265 2.737a.893.893 0 0 0-.908-.322l-19.013 7.33a.892.892 0 0 0-.093 1.585l4.839 2.934a.892.892 0 0 0 .966.033l9.07-5.94a.446.446 0 0 1 .604.094.446.446 0 0 1-.094.604l-9.07 5.94a.892.892 0 0 0-.322.717l-.517 4.104a.892.892 0 0 0 1.326.836l4.839-3.573 5.008 3.906a.892.892 0 0 0 1.403-.375l3.573-17.013a.892.892 0 0 0-.322-.908z"/>
-                </svg>
-            </a>
-            <a href="https://willonsuccess.com/" class="social-item" aria-label="Twitter">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                </svg>
-            </a>
-            <a href="https://willonsuccess.com/" class="social-item" aria-label="Instagram">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-            </a>
-            <a href="https://willonsuccess.com/" class="social-item" aria-label="Spotify">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15.18 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
-                </svg>
-            </a>
-        </nav>
-
-        <main class="bento-grid">
-            <a href="https://willonsuccess.com/" class="bento-item pulse-element">
-                <div class="bento-icon">🇺🇸</div>
-                <div class="bento-title">English</div>
-                <div class="bento-subtitle">Explore content in English</div>
-            </a>
-            <a href="https://willonsuccess.com/" class="bento-item pulse-element">
-                <div class="bento-icon">🇷🇺</div>
-                <div class="bento-title">Русский</div>
-                <div class="bento-subtitle">Исследуйте контент на русском</div>
-            </a>
-            <a href="https://willonsuccess.com/" class="bento-item pulse-element">
-                <div class="bento-icon">🇪🇸</div>
-                <div class="bento-title">Español</div>
-                <div class="bento-subtitle">Explora contenido en Español</div>
-            </a>
-        </main>
-
-        <footer class="footer">
-            <p></p>
-            <a href="https://github.com/willnapolini/linkbio" class="github-link" aria-label="View source code on GitHub">
+        <!--
+         * Container
+         * Purpose: Wraps main content for consistent layout and spacing, styled in main.css.
+         * Usage: Centers content and applies max-width for responsive design.
+        -->
+        <header class="profile-header" role="banner">
+            <!--
+             * Profile Header
+             * Purpose: Displays user profile information (image, name, bio).
+             * Accessibility: role="banner" identifies the header for screen readers.
+            -->
+            <img class="profile-header__image" src="https://avatars.githubusercontent.com/u/192521042?s=400&u=61065e42741486686fae5490a1df64ef4c58f0f2&v=4" alt="Profile photo of Will Napolini" loading="lazy">
+            <!--
+             * Profile Image
+             * Purpose: Displays the user's profile picture.
+             * Accessibility: alt attribute provides a description for screen readers.
+             * Performance: loading="lazy" defers image loading until visible, reducing initial page load time.
+            -->
+            <h1 class="profile-header__name">Will Napolini</h1>
+            <!--
+             * Profile Name
+             * Purpose: Displays the user's name prominently.
+             * Usage: Styled in components.css for typography and alignment.
+            -->
+            <p class="profile-header__bio">Mindset • Skillset • Toolset</p>
+            <!--
+             * Profile Bio
+             * Purpose: Provides a brief user description or tagline.
+             * Usage: Styled in components.css for secondary typography.
+            -->
+        </header>
+        <select class="language-switcher" aria-label="Select language"></select>
+        <!--
+         * Language Switcher
+         * Purpose: Allows users to select a language, populated dynamically by languages.js.
+         * Accessibility: aria-label ensures screen readers describe the element's purpose.
+         * Dependencies: Requires languages.js for options and event handling.
+        -->
+        <nav class="social-footer" aria-label="Social media links"></nav>
+        <!--
+         * Social Footer Navigation
+         * Purpose: Container for social media links, populated dynamically by links.js.
+         * Accessibility: aria-label identifies the navigation for screen readers.
+         * Dependencies: Requires links.js for rendering and components.css for styling.
+        -->
+        <main class="link-grid" role="main"></main>
+        <!--
+         * Link Grid
+         * Purpose: Main content area for displaying link cards, populated by links.js.
+         * Accessibility: role="main" identifies the primary content for screen readers.
+         * Dependencies: Requires links.js for dynamic content and components.css for styling.
+        -->
+        <footer class="site-footer" role="contentinfo">
+            <!--
+             * Site Footer
+             * Purpose: Contains theme switcher and GitHub link for additional navigation.
+             * Accessibility: role="contentinfo" identifies the footer for screen readers.
+            -->
+            <select class="theme-switcher" aria-label="Select theme"></select>
+            <!--
+             * Theme Switcher
+             * Purpose: Allows users to toggle between themes (e.g., light/dark), populated by themes.js.
+             * Accessibility: aria-label ensures screen readers describe the element's purpose.
+             * Dependencies: Requires themes.js for options and event handling.
+            -->
+            <a href="#" class="site-footer__github" aria-label="View source code on GitHub">
+                <!--
+                 * GitHub Link
+                 * Purpose: Links to the project’s GitHub repository.
+                 * Accessibility: aria-label provides a description for screen readers.
+                -->
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <!--
+                     * GitHub Icon
+                     * Purpose: Displays the GitHub logo as an inline SVG.
+                     * Usage: Styled via components.css, with fill="currentColor" for theme compatibility.
+                    -->
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
             </a>
         </footer>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="js/fileLoader.js"></script>
-    <script src="js/interactions.js"></script>
-    <script src="js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <!--
+     * Main Script
+     * Purpose: Loads the main JavaScript module to initialize the application.
+     * Usage: type="module" enables ES modules for modern JavaScript features.
+     * Performance Notes: Loaded at the end of the body to ensure DOM is ready, reducing render-blocking.
+    -->
 </body>
 </html>
