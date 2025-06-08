@@ -1,5 +1,3 @@
----
-
 # 🔗 LinkBio - Modern Links in Bio
 
 > A beautiful, modern alternative to Linktree with glassmorphism design, smooth animations, mobile-first approach, multilingual support, and dynamic theming.
